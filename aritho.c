@@ -58,7 +58,7 @@ int main()
     num5 *= num4; //num5 = num5 * num4;
     float P1 = num1; // since I cannot change the value of num1 (P1 = num1 = 10.5)
     P1 /= num2; //now, update the value of P1
-    
+
 
     printf("Compound Assignment Operators:\n");
     printf("num2 += num1: %.2f\n", num2);
