@@ -27,3 +27,6 @@ int main()
 
 //0 is seen as false value, while 1 is considered to be true. 
 //This is why the first if statement is executed, while the second one is not.
+
+// new coment pls work lol 
+
