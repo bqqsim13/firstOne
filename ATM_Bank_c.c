@@ -5,18 +5,30 @@
 
 int main()
 {
-    float currentBalances[MAX_ACCOUNTS] = {0}; // New array to store current balances
-    int choice;
-    float interest;
-    float balances[MAX_ACCOUNTS] = {0};
-    int numAccounts;
+    float currentBalances[MAX_ACCOUNTS] = {0}; // stores current balances
+    int choice;                                // user choice
+    float interest;                            // user interest rate
+    float balances[MAX_ACCOUNTS] = {0};        // initially balances for the accounts
+    int numAccounts;                           // number of accounts
 
     printf("Welcome to the ATM Bank!\n");
     printf("Enter the desired interest rate: ");
-    scanf("%f", &interest);
+    while (scanf("%f", &interest) != 1)
+    {
+
+        while (getchar() != '\n')
+            ;
+        printf("Invalid input. Please enter a number: ");
+    }
 
     printf("Enter the number of accounts: ");
-    scanf("%d", &numAccounts);
+    while (scanf("%d", &numAccounts) != 1)
+    {
+
+        while (getchar() != '\n')
+            ;
+        printf("Invalid input. Please enter a number: ");
+    }
 
     // since the user will enter a whole number, dividing by 100 to make it %
     const float interestRate = interest / 100;
@@ -34,11 +46,16 @@ int main()
     for (int i = 0; i < numAccounts; i++)
     {
         printf("Enter the balance for account %d: ", i + 1);
-        scanf("%f", &balances[i]);
-        currentBalances[i] = balances[i];
+        while (scanf("%f", &balances[i]) != 1)
+        {
+            while (getchar() != '\n')
+                ;
+            printf("Invalid input. Please enter a number: ");
+        }
+        currentBalances[i] = balances[i]; // assigning initial balance into the current balances from the start
     }
 
-    int currentAccount = 0;
+    int currentAccount = 0; // starting account is technically 0 since C starts index at 0, so account 1 is 0
 
     do
     {
@@ -54,7 +71,7 @@ int main()
         printf("Enter your choice: ");
         while (scanf("%d", &choice) != 1)
         {
-            // Clear the input buffer
+
             while (getchar() != '\n')
                 ;
             printf("Invalid input. Please enter a number: ");
@@ -67,11 +84,17 @@ int main()
             printf("-------------------------------\n");
             float depositAmount;
             printf("Enter the amount to deposit: ");
-            scanf("%f", &depositAmount);
+            while (scanf("%f", &depositAmount) != 1)
+            {
+
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             if (depositAmount > 0)
             {
                 currentBalances[currentAccount] += depositAmount;
-                printf("Amount %.2f deposited successfully.\n", depositAmount);
+                printf("Amount %.2f deposited successfully. Balance is now %.2f\n", depositAmount, currentBalances[currentAccount]);
             }
             else
             {
@@ -85,7 +108,12 @@ int main()
             float withdrawAmount;
             printf("-------------------------------\n");
             printf("Enter the amount to withdraw: ");
-            scanf("%f", &withdrawAmount);
+            while (scanf("%f", &withdrawAmount) != 1)
+            {
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             if (withdrawAmount > currentBalances[currentAccount])
             {
                 printf("Insufficient balance. Unable to withdraw.\n");
@@ -98,7 +126,7 @@ int main()
             else
             {
                 currentBalances[currentAccount] -= withdrawAmount;
-                printf("Amount %.2f withdrawn successfully.\n", withdrawAmount);
+                printf("Amount %.2f withdrawn successfully. Balance is now %.2f\n", withdrawAmount, currentBalances[currentAccount]);
             }
             break;
         }
@@ -114,7 +142,12 @@ int main()
             printf("Your interest rate is: %.2f%%\n", interest);
             int years;
             printf("Enter the number of years: ");
-            scanf("%d", &years);
+            while (scanf("%d", &years) != 1)
+            {
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             float futureBalance = currentBalances[currentAccount] * pow((1 + interestRate), years);
             printf("Future balance after %d years: %.2f\n", years, futureBalance);
             break;
@@ -125,7 +158,12 @@ int main()
             int accountNum;
             printf("-------------------------------\n");
             printf("Enter the account number to switch to (1-%d): ", numAccounts);
-            scanf("%d", &accountNum);
+            while (scanf("%d", &accountNum) != 1)
+            {
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             if (accountNum >= 1 && accountNum <= numAccounts)
             {
                 currentAccount = accountNum - 1;                         // since the index is one below in C

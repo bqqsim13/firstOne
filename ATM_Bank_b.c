@@ -9,7 +9,13 @@ int main()
 
     printf("Welcome to the ATM Bank!\n");
     printf("Enter the desired interest rate: ");
-    scanf("%f", &interest);
+    while (scanf("%f", &interest) != 1)
+    {
+        // Clear the input buffer
+        while (getchar() != '\n')
+            ;
+        printf("Invalid input. Please enter a number: ");
+    }
 
     const float interestRate = interest / 100;
 
@@ -22,19 +28,32 @@ int main()
         printf("4. Future Balance Using Interest Rate\n");
         printf("0. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+        while (scanf("%d", &choice) != 1)
+        {
+            // Clear the input buffer
+            while (getchar() != '\n')
+                ;
+            printf("Invalid input. Please enter a number: ");
+        }
 
         switch (choice)
         {
         case 1:
         {
+            printf("-------------------------------\n");
             float depositAmount;
             printf("Enter the amount to deposit: ");
-            scanf("%f", &depositAmount);
+            while (scanf("%f", &depositAmount) != 1)
+            {
+                // Clear the input buffer
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             if (depositAmount > 0)
             {
                 balance += depositAmount;
-                printf("Amount %.2f deposited successfully.\n", depositAmount);
+                printf("Amount %.2f deposited successfully. Balance is now %.2f\n", depositAmount, balance);
             }
             else
             {
@@ -45,9 +64,16 @@ int main()
 
         case 2:
         {
+            printf("-------------------------------\n");
             float withdrawAmount;
             printf("Enter the amount to withdraw: ");
-            scanf("%f", &withdrawAmount);
+            while (scanf("%f", &withdrawAmount) != 1)
+            {
+                // Clear the input buffer
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             if (withdrawAmount > balance)
             {
                 printf("Insufficient balance. Unable to withdraw.\n");
@@ -60,21 +86,29 @@ int main()
             else
             {
                 balance -= withdrawAmount;
-                printf("Amount %.2f withdrawn successfully.\n", withdrawAmount);
+                printf("Amount %.2f withdrawn successfully. Balance is now %.2f\n", withdrawAmount, balance);
             }
             break;
         }
 
         case 3:
+            printf("-------------------------------\n");
             printf("Current balance: %.2f\n", balance);
             break;
 
         case 4:
         {
+            printf("-------------------------------\n");
             printf("Your interest rate is: %.2f%%\n", interest);
             int years;
             printf("Enter the number of years: ");
-            scanf("%d", &years);
+            while (scanf("%d", &years) != 1)
+            {
+                // Clear the input buffer
+                while (getchar() != '\n')
+                    ;
+                printf("Invalid input. Please enter a number: ");
+            }
             float futureBalance = balance * pow((1 + interestRate), years);
             printf("Future balance after %d years: %.2f\n", years, futureBalance);
             break;
